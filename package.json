@@ -4,7 +4,7 @@
   "description": "Using ES6 classes and constructors and NodeJS to build team profile page",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

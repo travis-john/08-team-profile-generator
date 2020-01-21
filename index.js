@@ -19,6 +19,7 @@ const team = {
   addMember: false
 };
 
+//adding member to team
 const addMember = async (type, memberPrompt) => {
 
   //get answers
@@ -30,22 +31,22 @@ const addMember = async (type, memberPrompt) => {
   //creating employee object from corresponding class
   switch(title){
     case 'manager':
-      employee = new Employee(answers.name, answers.id, answers.email, answers.officePhone)
+      employee = new Manager(answers.name, answers.id, answers.email, answers.phone)
     break;
     case 'engineer':
-      employee = new Employee(ansers.name, answers.id, answers.email, answers.github)
+      employee = new Engineer(ansers.name, answers.id, answers.email, answers.github)
     break;
     case 'intern':
-      employee = new Employee(answers.name, answers.id, answers.email, answers.school)
+      employee = new Intern(answers.name, answers.id, answers.email, answers.school)
   }
 
   //adding it to team object
   team[title].push(employee);
-  console.log(`Successfully added employee ${employee.answers.name}`);
+  console.log(`Successfully added`, employee);
 
   //asking if there are more members of team
-  const answer = await askAbout(checkMemberToAdd);
-  team.hasMemberToAdd = answer.hasMemberToAdd;
+  const answer = await askAbout(checkAddMember);
+  team.addMember = answer.addMember;
 }
 
 //initiating the app
@@ -53,7 +54,7 @@ async function init(){
 
   await addMember('manager', managerPrompt)
 
-  while (team.hasMemberToAdd){
+  while (team.addMember){
     addMember('member', memberPrompt)
   }
 }
