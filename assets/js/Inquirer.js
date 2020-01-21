@@ -68,7 +68,7 @@ exports.memberPrompt = [
       for (char of name.trim()) {
         if (!/[a-zA-Z ]/.test(char)) verifiedName = `Invalid input. Please enter a valid name.`;
       }
-      return verdit;
+      return verifiedName;
     },
     filter: fullName => {
       let name = fullName.trim();
@@ -129,10 +129,12 @@ exports.memberPrompt = [
   }
 ];
 
+
+
 exports.checkAddMember = [
   {
     type: `confirm`,
-    name: `addMember`,
+    name: `hasMemberToAdd`,
     message: `Do you have more members to add?`
   }
 ];

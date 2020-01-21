@@ -16,7 +16,7 @@ const team = {
   manager: [],
   engineer: [],
   intern: [],
-  addMember: false
+  hasMemberToAdd: false
 };
 
 //adding member to team
@@ -34,7 +34,7 @@ const addMember = async (type, memberPrompt) => {
       employee = new Manager(answers.name, answers.id, answers.email, answers.phone)
     break;
     case 'engineer':
-      employee = new Engineer(ansers.name, answers.id, answers.email, answers.github)
+      employee = new Engineer(answers.name, answers.id, answers.email, answers.github)
     break;
     case 'intern':
       employee = new Intern(answers.name, answers.id, answers.email, answers.school)
@@ -46,16 +46,17 @@ const addMember = async (type, memberPrompt) => {
 
   //asking if there are more members of team
   const answer = await askAbout(checkAddMember);
-  team.addMember = answer.addMember;
+  team.hasMemberToAdd = answer.hasMemberToAdd;
 }
 
 //initiating the app
 async function init(){
 
-  await addMember('manager', managerPrompt)
+  await addMember('manager', managerPrompt);
 
-  while (team.addMember){
-    addMember('member', memberPrompt)
+
+  while (team.hasMemberToAdd){
+    addMember('member', memberPrompt);
   }
 }
 
