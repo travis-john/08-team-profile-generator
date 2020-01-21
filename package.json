@@ -1,0 +1,25 @@
+{
+  "name": "unc-homework-08",
+  "version": "1.0.0",
+  "description": "Using ES6 classes and constructors and NodeJS to build team profile page",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/travis-john/unc-homework-08.git"
+  },
+  "author": "Travis John",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/travis-john/unc-homework-08/issues"
+  },
+  "homepage": "https://github.com/travis-john/unc-homework-08#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "inquirer": "^7.0.3"
+  }
+}
