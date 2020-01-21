@@ -52,9 +52,10 @@ const addMember = async (type, memberPrompt) => {
 //initiating the app
 async function init(){
 
+  //adding manager
   await addMember('manager', managerPrompt);
 
-
+  //adding team members as long as user selects 'Y'
   while (team.hasMemberToAdd){
     await addMember('member', memberPrompt);
   }
