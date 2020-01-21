@@ -56,7 +56,7 @@ async function init(){
 
 
   while (team.hasMemberToAdd){
-    addMember('member', memberPrompt);
+    await addMember('member', memberPrompt);
   }
 }
 
