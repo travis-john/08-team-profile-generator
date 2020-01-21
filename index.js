@@ -10,3 +10,11 @@ const fs = require('fs'),
       const { managerPrompt, memberPrompt, addMember, askAbout } = require(`.assets/js/Inquirer`),
       readFile = util.promisifify(fs.readFile),
       writeFile = util.promisify(fs.writeFile);
+
+//storing data for team members
+const team = {
+  manager: [],
+  engineer: [],
+  intern: [],
+  addMember: false
+};
