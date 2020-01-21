@@ -20,6 +20,7 @@
     "jest": "^24.9.0"
   },
   "dependencies": {
-    "inquirer": "^7.0.3"
+    "inquirer": "^7.0.3",
+    "open": "^7.0.0"
   }
 }

@@ -1,4 +1,4 @@
-const inquirer = require(`./inquirer`);
+const inquirer = require(`inquirer`);
 
 exports.managerPrompt = [
   {
@@ -15,9 +15,12 @@ exports.managerPrompt = [
       return verifiedName;
     },
     filter: fullName => {
-      const fullName = name.trim();
+      let name = fullName.trim()
+      ;
       if(name) {
+
         let arr = name.split(` `);
+
         const newArr = arr.map(word => word.replace(word[0], word[0].toUpperCase()));
 
         return newArr.join(` `);
@@ -61,14 +64,14 @@ exports.memberPrompt = [
     validate: name => {
       if (name === undefined) return `No input entered. Please enter a valid name.`;
 
-      let verdit = true;
+      let verifiedName = true;
       for (char of name.trim()) {
-        if (!/[a-zA-Z ]/.test(char)) verdit = `Invalid input. Please enter a valid name.`;
+        if (!/[a-zA-Z ]/.test(char)) verifiedName = `Invalid input. Please enter a valid name.`;
       }
       return verdit;
     },
     filter: fullName => {
-      const name = fullName.trim();
+      let name = fullName.trim();
 
       if (name) {
         let arr = name.split(` `);
@@ -126,7 +129,7 @@ exports.memberPrompt = [
   }
 ];
 
-exports.addMember = [
+exports.checkAddMember = [
   {
     type: `confirm`,
     name: `addMember`,
