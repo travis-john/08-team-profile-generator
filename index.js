@@ -49,6 +49,64 @@ const addMember = async (type, memberPrompt) => {
   team.hasMemberToAdd = answer.hasMemberToAdd;
 }
 
+//generating a card
+const generateCard = async (role, data) => {
+
+  //getting employee card template
+  let card = await readFile(path.join(__dirname, './assets/html', `${role}-card.html`), 'utf-8');
+
+  //replacing placeholder data with real data
+  for (let prop in data) {
+    const reg = new RegExp(`{%${prop}%}`, 'gi');
+    card = card.replace(reg, data[prop]);
+  }
+
+  console.log(`Successfully generated cards`);
+
+}
+
+//generating HTML
+const generateHTML = async () => {
+
+  //getting main.html to append with cards
+  let mainHTML = await readFile(path.join(__dirname, './assets/html', 'main.html'), 'utf-8');
+
+  //storing cards as variable
+  let cards = '';
+
+  //get all team data in array for loop
+  const teamArray = [...team.manager, ...team.engineer, ...team.intern];
+
+  for (employee of teamArray){
+
+    //get all employees data
+    const { name, id, email } = employee;
+    const role = employee.getRole().toLowerCase();
+    let special = "";
+
+    //getting each employee's special data
+    switch (role) {
+      case "manager":
+        special = employee.getNumber();
+        break;
+      case "engineer":
+        special = employee.getGithub();
+        break;
+      case "intern":
+        special = employee.getSchool();
+    }
+
+    //appending cards
+    cards += await generateCard(role, { name, id, email, special });
+  }
+
+  //replace main.html with cards and return it
+  return mainHTML.replace("{%CARD%}", cards);
+
+  console.log(`Successfully generated HTML`);
+
+}
+
 //initiating the app
 async function init(){
 
@@ -59,6 +117,15 @@ async function init(){
   while (team.hasMemberToAdd){
     await addMember('member', memberPrompt);
   }
+
+  //creating html
+  let html = await generateHTML();
+
+  //saving html to output folder
+  await writeFile(path.join(__dirname, 'output', 'team.html'), 'utf-8');
+
+  //open html file
+  await open(path.join(__dirname, 'output', 'team.html'));
 }
 
 init();
