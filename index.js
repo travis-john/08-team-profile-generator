@@ -61,6 +61,8 @@ const generateCard = async (role, data) => {
     card = card.replace(reg, data[prop]);
   }
 
+  return card;
+
   console.log(`Successfully generated cards`);
 
 }
@@ -82,17 +84,17 @@ const generateHTML = async () => {
     //get all employees data
     const { name, id, email } = employee;
     const role = employee.getRole().toLowerCase();
-    let special = "";
+    let special = '';
 
     //getting each employee's special data
     switch (role) {
-      case "manager":
+      case 'manager':
         special = employee.getNumber();
         break;
-      case "engineer":
+      case 'engineer':
         special = employee.getGithub();
         break;
-      case "intern":
+      case 'intern':
         special = employee.getSchool();
     }
 
@@ -101,7 +103,7 @@ const generateHTML = async () => {
   }
 
   //replace main.html with cards and return it
-  return mainHTML.replace("{%CARD%}", cards);
+  return mainHTML.replace('{%CARD%}', cards);
 
   console.log(`Successfully generated HTML`);
 
@@ -122,10 +124,17 @@ async function init(){
   let html = await generateHTML();
 
   //saving html to output folder
-  await writeFile(path.join(__dirname, 'output', 'team.html'), 'utf-8');
+  await writeFile(path.join(__dirname, 'output', 'team.html'), html, 'utf-8');
 
   //open html file
   await open(path.join(__dirname, 'output', 'team.html'));
 }
+
+//general error function
+process.on('unhandledRejection', err => {
+  console.log(`Oops! Something went wrong. Please close the app and try again`);
+  console.log(`Detail : ${err.name} | ${err.message}`);
+  process.exit(1);
+});
 
 init();
