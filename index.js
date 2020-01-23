@@ -112,22 +112,25 @@ const generateHTML = async () => {
 //initiating the app
 async function init(){
 
-  //adding manager
-  await addMember('manager', managerPrompt);
+  try {
+    //adding manager
+    await addMember('manager', managerPrompt);
 
-  //adding team members as long as user selects 'Y'
-  while (team.hasMemberToAdd){
-    await addMember('member', memberPrompt);
+    //adding team members as long as user selects 'Y'
+    while (team.hasMemberToAdd){
+      await addMember('member', memberPrompt);
+    }
+
+    //creating html
+    let html = await generateHTML();
+
+    //saving html to output folder
+    await writeFile(path.join(__dirname, 'output', 'team.html'), html, 'utf-8');
+
+    //open html file
+    await open(path.join(__dirname, 'output', 'team.html'));
+
   }
-
-  //creating html
-  let html = await generateHTML();
-
-  //saving html to output folder
-  await writeFile(path.join(__dirname, 'output', 'team.html'), html, 'utf-8');
-
-  //open html file
-  await open(path.join(__dirname, 'output', 'team.html'));
 
   //general error function
   catch (err) {
