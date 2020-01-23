@@ -130,12 +130,9 @@ async function init(){
   await open(path.join(__dirname, 'output', 'team.html'));
 
   //general error function
-  process.on('unhandledRejection', err => {
-    console.log(`Oops! Something went wrong. Please close the app and try again`);
-    console.log(`Detail : ${err.name} | ${err.message}`);
-    process.exit(1);
-  });
-
+  catch (err) {
+    console.log(err);
+  }
 }
 
 init();
